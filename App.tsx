@@ -68,8 +68,8 @@ const styles = StyleSheet.create({
     borderWidth: 1,
   },
   center:{
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center"
-  }
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
 });
