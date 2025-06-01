@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, TextInput, View, Button, Alert, SafeAreaView } from 'react-native';
+import { StyleSheet, Text, TextInput, View, Button, Alert} from 'react-native';
 import{useState, useEffect} from 'react';
 import * as SQLite from 'expo-sqlite';
 import _tarefa from './types/tarefa';
@@ -15,7 +15,7 @@ export default function App() {
 
   useEffect(
     () =>{
-      db.execSync(`CREATE TABLE IF NOT EXISTS tarefa(
+      db.execSync(`CREATE TABLE IF NOT EXISTS tarefas(
         id INTEGER PRIMARY KEY NOT null,
         texto VARCHAR(100),
         concluido INTEGER DEFAULT 0
@@ -54,22 +54,49 @@ const renderLista = () =>{
 }
 
   return (
-    <SafeAreaView style={styles.center}>
-      <TextInput style={styles.input} value={novaTarefa} onChangeText={setNovaTarefa}/>
-      <Button onPress={adicionar} title='Adicionar'/>
-      <View>
-        {renderLista()}
-      </View>
-    </SafeAreaView>
-  );
+  <View style={styles.center}>
+    <TextInput
+      style={styles.input}
+      value={novaTarefa}
+      onChangeText={setNovaTarefa}
+      placeholder="Digite uma tarefa..."
+      placeholderTextColor="#555"
+    />
+
+    <View style={styles.botao}>
+      <Button onPress={adicionar} title='★ ADICIONAR TAREFA ★' color="pink" />
+    </View>
+
+    <View style={styles.lista}>
+      {renderLista()}
+    </View>
+  </View>
+);
+
 }
 const styles = StyleSheet.create({
   input:{
-    borderWidth: 1,
+    borderWidth: 2,
+    borderRadius: 20,
+    width: '80%',
+    height: '5%',
+    backgroundColor: '#f8afc6',
+    paddingLeft: '5%',
+    paddingRight: '5%',
+    fontSize: 20,
   },
   center:{
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: '#ad5069',
+  },
+    botao: {
+    marginTop: 20,
+  },
+  lista: {
+    marginTop: 20,
+    width: '100%',
+    alignItems: 'center',
   },
 });
